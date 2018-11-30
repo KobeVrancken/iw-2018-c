@@ -1,0 +1,5 @@
+#error Deze boodschap naar stderr!
+int main(){
+ return -1;
+ #error Deze enkel zonder -e flag
+}

@@ -1,0 +1,80 @@
+#!/bin/bash
+
+diffprog=vimdiff
+ask=1
+workdir=/tmp/iw-tests/
+
+if [ -z ${VIMDIFF+x} ]; then
+    diffprog=diff
+    ask=0
+fi
+
+show_diff() {
+    $diffprog $1 $2
+}
+
+set -e
+test_file() {
+    filepath=$1
+    in_file=$(basename $filepath)
+    base=${in_file%.c.in}
+    reference_file=$base.c
+    out_file=$base.out
+    reference_err_file=$base.err
+    err_out_file=$base.out.err
+    set -e
+    cp $filepath /tmp/iw-tests
+    cp ${filepath%.c.in}.err /tmp/iw-tests/
+    outfile=${filepath%.in}
+    cp $outfile /tmp/iw-tests
+    set +e
+
+
+    echo "==================="
+    echo "$(basename $outfile)"
+    echo "==================="
+    $workdir/cpp-iw $workdir/$in_file > $workdir/$out_file 2> $workdir/$err_out_file
+    
+    
+    cmp --silent $workdir/$out_file $workdir/$reference_file
+    outeq=$?
+    cmp --silent $workdir/$err_out_file $workdir/$reference_err_file
+    erreq=$?
+
+    if [ $outeq -eq 0 ]; then
+	echo "stdout: SUCCESS"
+    else
+	echo "stdout: FAILED"
+	echo "-- start diff output --"
+	show_diff $workdir/$out_file $workdir/$reference_file
+	echo "-- stop diff output --"
+    fi
+    if [ $erreq -eq 0 ]; then
+	echo "stderr: SUCCESS"
+    else
+	echo "stderr: FAILED"
+	show_diff $workdir/$err_out_file $workdir/$reference_err_file
+    fi
+}
+
+make > /dev/null
+mkdir -p $workdir
+cp cpp-iw $workdir
+
+if [ $# -eq 1 ]
+  then
+      test_file "tests/$1.c.in"
+else
+    for filepath in tests/*.in; do
+	test_file $filepath
+	if [ $ask -eq 1 ]
+	   then
+	       read -p "Continue? " -n 1 -r
+	       echo ""
+	       if [[ ! $REPLY =~ ^[Yy]$ ]]
+               then
+		   [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
+               fi
+	fi
+    done
+fi

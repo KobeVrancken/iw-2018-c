@@ -1,0 +1,6 @@
+/* Multi line comments
+
+   Should be replaced as well */
+int /*in the middle */main(){
+ /*remove me */return 0;
+}

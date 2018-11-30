@@ -1,0 +1,6 @@
+// Single line comments should be replaced with a space
+int main(){
+ //Even if there is no whitespace behind //
+ return -1; //remove this
+ //You can assume that there is always either whitespace or a new line character before //
+}

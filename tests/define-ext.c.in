@@ -1,0 +1,9 @@
+#define		MY_STRING	"All	tabs	no	spaces"
+#define MY_INT -1
+#define EMPTY
+#define MAIN int main(){
+EMPTY EMPTY EMPTY 
+MAIN 
+ char** s = MY_STRING ;
+ return MY_INT ;
+}

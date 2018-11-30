@@ -1,0 +1,6 @@
+#warning123 not valid
+#myowncommand
+int main(){
+ #again
+ return 1;
+}

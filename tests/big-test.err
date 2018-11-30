@@ -1,0 +1,6 @@
+warning: this entire line should be output as a warning message 
+warning: and another one
+warning: preprocessor directives may be preceded by arbitrarily many spaces and/or tabs
+error: this entire line is an error message and may terminate the preprocessor
+error: invalid preprocessing directive: #warning1234
+warning: 'MY_KEY' redefined

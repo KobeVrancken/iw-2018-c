@@ -1,0 +1,8 @@
+#undef I_DO_NOT_EXIST
+#define MY_INT 1
+#undef MY_INT
+MY_INT
+#define MY_INT 2
+int main(){
+ return MY_INT ;
+} 

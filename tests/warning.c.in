@@ -1,0 +1,5 @@
+#warning Deze boodschap naar stderr!
+int main(){
+ return -1;
+ #warning En ook deze boodschap.
+}

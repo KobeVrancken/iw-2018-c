@@ -1,0 +1,6 @@
+//Bereken de som van a en b
+int som(int a, int b)
+{
+   //hier nog wat commentaar
+   return a+b; 
+}
