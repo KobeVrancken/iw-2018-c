@@ -28,8 +28,6 @@ A block comment can start in the middle of a line  and everthing is printed agai
 not always followed by a space.
 
 
-
-
 and this should be visible again
 
 %%%%%%%%%% WARNING PREPROCESSOR DIRECTIVE %%%%%%%%%%
