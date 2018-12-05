@@ -21,10 +21,10 @@ You should also be able to handle tab characters
 
 %%%%%%%%%% BLOCK COMMENTS %%%%%%%%%%
 
-A block comment can start in the middle of a line  and everthing is printed again
+A block comment can start in the middle of a line and everthing is printed again
 
 
- tab, but they are
+tab, but they are
 not always followed by a space.
 
 
@@ -50,7 +50,7 @@ Note that value strings can be arbitrarily long and contain spaces:
 Note that keys and values may be separated by arbitrarily many spaces and tabs
 
 Note that it is also allowed to define keys with empty values
-Occurences of   should be stripped.
+Occurences of should be stripped.
 
 The following word should be replaced with my_value right here: my_value 
 And it should also work for the following foo sentence: Lorem ipsum dolor sit amet, consectetur adipiscing elit 
