@@ -1,11 +1,17 @@
 #!/bin/bash
 set -e
+
 folder=/tmp/iw-sub/
+cleanup() {
+    rm -rf $folder
+}
+
+trap 'cleanup' ERR
+cleanup
 mkdir -p $folder
 cp -rf $1 $folder
 cd $folder
 unzip $(basename $1)
-echo "CD to " $(/bin/ls -d -t1 | head -n 1)
 cd $(/bin/ls -d */ -t1 | head -n 1)
 
 make clean
