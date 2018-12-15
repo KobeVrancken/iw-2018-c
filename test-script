@@ -2,12 +2,16 @@
 
 diffprog=vimdiff
 ask=1
-workdir=/tmp/iw-tests/
+workdir=$(mktemp -d)
+cleanup() {
+    rm -rf $workdir
+}
 
 if [ -z ${VIMDIFF+x} ]; then
     diffprog=diff
     ask=0
 fi
+trap 'cleanup' ERR
 
 show_diff() {
     if [ -z ${NODIFF+x} ]; then
@@ -27,10 +31,10 @@ test_file() {
     reference_err_file=$base.err
     err_out_file=$base.out.err
     set -e
-    cp $filepath /tmp/iw-tests
-    cp ${filepath%.c.in}.err /tmp/iw-tests/
+    cp $filepath $workdir
+    cp ${filepath%.c.in}.err $workdir
     outfile=${filepath%.in}
-    cp $outfile /tmp/iw-tests
+    cp $outfile $workdir
     set +e
 
 
@@ -59,7 +63,6 @@ test_file() {
     fi
 }
 
-mkdir -p $workdir
 cp cpp-iw $workdir
 
 if [ $# -eq 1 ]
