@@ -1,13 +1,12 @@
 #!/bin/bash
 set -e
 
-folder=/tmp/iw-sub/
+folder=$(mktemp -d)
 cleanup() {
     rm -rf $folder
 }
 
 trap 'cleanup' ERR
-cleanup
 mkdir -p $folder
 cp -rf $1 $folder
 cd $folder
